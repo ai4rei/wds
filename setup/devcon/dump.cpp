@@ -464,10 +464,10 @@ Return Value:
 --*/
 {
     SP_DEVINSTALL_PARAMS deviceInstallParams;
-    WCHAR SectionName[LINE_LEN];
-    WCHAR DrvDescription[LINE_LEN];
-    WCHAR MfgName[LINE_LEN];
-    WCHAR ProviderName[LINE_LEN];
+    TCHAR SectionName[LINE_LEN];
+    TCHAR DrvDescription[LINE_LEN];
+    TCHAR MfgName[LINE_LEN];
+    TCHAR ProviderName[LINE_LEN];
     HKEY hKey = NULL;
     DWORD RegDataLength;
     DWORD RegDataType;

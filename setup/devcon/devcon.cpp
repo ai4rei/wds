@@ -221,14 +221,16 @@ final:
     // sometimes during device installation, a reboot is needed, so this warning
     // is being suppressed for the call to InitiateSystemShutdownEx.
     //
-#pragma warning( suppress: 28159)
+#if 0
     return InitiateSystemShutdownEx(NULL,
                                     NULL,
                                     0,
                                     FALSE,
                                     TRUE,
                                     REASON_PLANNED_FLAG | REASON_HWINSTALL);
-
+#else
+    return ExitWindowsEx(EWX_REBOOT, 0);
+#endif
 }
 
 LPTSTR GetDeviceStringProperty(_In_ HDEVINFO Devs, _In_ PSP_DEVINFO_DATA DevInfo, _In_ DWORD Prop)
@@ -442,7 +444,6 @@ Return Value:
                 return NULL;
             }
 
-#pragma prefast(suppress:__WARNING_BUFFER_OVERFLOW, "ESP:732")
             len+=(int)_tcslen(multiSz+len)+1;
         }
     }
@@ -713,10 +714,8 @@ Return Value:
             // neither u nor l will be examined) and it doesn't need to examine
             // the values in all code paths.
             //
-#pragma warning( suppress: 28193)
-            TCHAR u = _totupper(wildMark[0]);
-#pragma warning( suppress: 28193)
-            TCHAR l = _totlower(wildMark[0]);
+            TCHAR u = (TCHAR)_totupper(wildMark[0]);
+            TCHAR l = (TCHAR)_totlower(wildMark[0]);
             while(scanItem[0] && scanItem[0]!=u && scanItem[0]!=l) {
                 scanItem = CharNext(scanItem);
             }
@@ -827,7 +826,7 @@ Return Value:
     return false;
 }
 
-int EnumerateDevices(_In_ LPCTSTR BaseName, _In_opt_ LPCTSTR Machine, _In_ DWORD Flags, _In_ int argc, _In_reads_(argc) PWSTR* argv, _In_ CallbackFunc Callback, _In_ LPVOID Context)
+int EnumerateDevices(_In_ LPCTSTR BaseName, _In_opt_ LPCTSTR Machine, _In_ DWORD Flags, _In_ int argc, _In_reads_(argc) PTSTR* argv, _In_ CallbackFunc Callback, _In_ LPVOID Context)
 /*++
 
 Routine Description:
@@ -1036,7 +1035,7 @@ final:
 
 int
 __cdecl
-_tmain(_In_ int argc, _In_reads_(argc) PWSTR* argv)
+_tmain(_In_ int argc, _In_reads_(argc) PTSTR* argv)
 /*++
 
 Routine Description:
