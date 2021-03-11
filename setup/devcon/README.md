@@ -12,6 +12,8 @@ products:
 
 [DevCon](https://docs.microsoft.com/windows-hardware/drivers/devtest/devcon) is a command-line tool that displays detailed information about devices, and lets you search for and manipulate devices from the command line. DevCon enables, disables, installs, configures, and removes devices on the local computer and displays detailed information about devices on local and remote computers. DevCon is included in the WDK.
 
+**This _unofficial_ version has been enabled to compile and work on Windows 98 Second Edition, Visual C++ 6.0 and the Windows 2000 DDK. Back up your computer before use. You use it on YOUR OWN RISK.**
+
 This document explains the DevCon design, and how to use the SetupAPI and device installation functions to enumerate devices and perform device operations in a console application. For a complete description of DevCon features and instructions for using them, see the DevCon help file included with the WDK documentation in Driver Development Tools/Tools for Testing Drivers/DevCon.
 
 DevCon is provided in ready-to-run form in tools\\devcon. For usage, refer to the document provided with devcon.exe. DevCon is a command line utility with built-in documentation available by typing "devcon help".
